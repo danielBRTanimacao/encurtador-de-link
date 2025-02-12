@@ -9,12 +9,55 @@
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="./assets/css/index.css" />
         <title>Encurtador de links</title>
     </head>
     <body>
-        <header class="p-5 text-center bg-primary text-light">
+        <header class="p-5 text-center bg-primary text-light shadow">
             <h1>Encurtador de links</h1>
         </header>
+        <main class="container mt-5">
+            <form
+                action="/"
+                method="post"
+                class="position-absolute top-50 start-50 translate-middle shadow-lg rounded bg-secondary-subtle p-5"
+            >
+                <div class="mb-3">
+                    <label for="linkDigitedId" class="form-label">
+                        Digite o link:
+                    </label>
+                    <input
+                        type="url"
+                        class="form-control"
+                        name="linkDigited"
+                        id="linkDigitedId"
+                        required
+                    />
+                </div>
+                <button
+                    onclick="teste"
+                    type="submit"
+                    class="btn btn-primary form-control"
+                >
+                    Encurtar
+                </button>
+            </form>
+            <section>
+                <ul>
+                    <li id="requestDigited"></li>
+                    <li id="responseDigited"></li>
+                </ul>
+            </section>
+        </main>
+        <script>
+            function teste() {
+                const digited = "Url digitada: ";
+                const shorted = "Url encurtada :";
+
+                const request = document.querySelector("#requestDigited");
+                const response = document.querySelector("#responseDigited");
+            }
+        </script>
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
