@@ -16,11 +16,13 @@
         <header class="p-5 text-center bg-primary text-light shadow">
             <h1>Encurtador de links</h1>
         </header>
-        <main class="container mt-5">
+        <main
+            class="mt-5 pt-5 d-flex justify-content-center align-items-center"
+        >
             <form
-                action="/"
-                method="post"
-                class="position-absolute top-50 start-50 translate-middle shadow-lg rounded bg-secondary-subtle p-5"
+                action="#"
+                class="shadow-lg rounded bg-secondary-subtle p-5"
+                onsubmit="return sendLink(event)"
             >
                 <div class="mb-3">
                     <label for="linkDigitedId" class="form-label">
@@ -28,34 +30,45 @@
                     </label>
                     <input
                         type="url"
-                        class="form-control"
+                        class="form-control shadow"
                         name="linkDigited"
                         id="linkDigitedId"
                         required
                     />
                 </div>
                 <button
-                    onclick="teste"
                     type="submit"
-                    class="btn btn-primary form-control"
+                    class="btn btn-primary form-control shadow"
                 >
                     Encurtar
                 </button>
+                <div class="d-none" id="newLink">
+                    <p
+                        class="mt-5 bg-light p-3 rounded shadow-lg"
+                        id="shortenedValue"
+                    ></p>
+                    <div class="mt-2 d-flex justify-content-center">
+                        <button
+                            type="button"
+                            class="btn btn-outline-dark shadow-lg"
+                        >
+                            Copiar
+                        </button>
+                    </div>
+                </div>
             </form>
-            <section>
-                <ul>
-                    <li id="requestDigited"></li>
-                    <li id="responseDigited"></li>
-                </ul>
-            </section>
         </main>
         <script>
-            function teste() {
-                const digited = "Url digitada: ";
-                const shorted = "Url encurtada :";
+            function sendLink(event) {
+                event.preventDefault();
 
-                const request = document.querySelector("#requestDigited");
-                const response = document.querySelector("#responseDigited");
+                const newlink = document.querySelector("#newLink");
+                const valueNew = document.querySelector("#shortenedValue");
+
+                newlink.classList.remove("d-none");
+                valueNew.innerHTML = "nova url";
+
+                return false;
             }
         </script>
         <script
