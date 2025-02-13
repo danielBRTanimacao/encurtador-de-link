@@ -38,7 +38,7 @@ const handleSendLink = async (event: Event): Promise<void> => {
         }
     } catch (error) {
         console.error("Erro:", error);
-        alert("Erro ao encurtar a URL.");
+        document.querySelector("div.alert")?.classList.remove("d-none");
     }
 };
 
@@ -53,9 +53,14 @@ const handleCopyUrl = (): void => {
         navigator.clipboard
             .writeText(text)
             .then(() => {
-                alert("Texto copiado!");
+                document
+                    .querySelector("small.copyed")
+                    ?.classList.remove("d-none");
             })
             .catch((err) => {
+                document
+                    .querySelector("small.copydanger")
+                    ?.classList.remove("d-none");
                 console.error("Erro ao copiar:", err);
             });
     }

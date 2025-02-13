@@ -37,12 +37,15 @@
                 >
                     Encurtar
                 </button>
+                <div class="alert alert-danger mt-4 d-none" role="alert">
+                    Não foi possivel encurtar o link...
+                </div>
                 <div class="d-none" id="newLink">
                     <p
                         class="mt-5 bg-light p-3 rounded shadow-lg"
                         id="shortenedValue"
                     ></p>
-                    <div class="mt-2 d-flex justify-content-center">
+                    <div class="mt-2 d-flex justify-content-center flex-column">
                         <button
                             type="button"
                             class="btn btn-outline-dark shadow-lg"
@@ -50,6 +53,13 @@
                         >
                             Copiar
                         </button>
+                        <small class="copyed text-center mt-2 d-none"
+                            >Texto copiado!</small
+                        >
+                        <small
+                            class="copydanger text-center text-danget mt-2 d-none"
+                            >Texto copiado!</small
+                        >
                     </div>
                 </div>
             </form>

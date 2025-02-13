@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var _a;
 const handleSendLink = (event) => __awaiter(void 0, void 0, void 0, function* () {
+    var _b;
     event.preventDefault();
     const inputElement = document.querySelector("input#linkDigitedId");
     const newLinkDiv = document.querySelector("div#newLink");
@@ -33,7 +34,7 @@ const handleSendLink = (event) => __awaiter(void 0, void 0, void 0, function* ()
     }
     catch (error) {
         console.error("Erro:", error);
-        alert("Erro ao encurtar a URL.");
+        (_b = document.querySelector("div.alert")) === null || _b === void 0 ? void 0 : _b.classList.remove("d-none");
     }
 });
 const handleCopyUrl = () => {
@@ -43,9 +44,14 @@ const handleCopyUrl = () => {
         navigator.clipboard
             .writeText(text)
             .then(() => {
-            alert("Texto copiado!");
+            var _a;
+            (_a = document
+                .querySelector("small.copyed")) === null || _a === void 0 ? void 0 : _a.classList.remove("d-none");
         })
             .catch((err) => {
+            var _a;
+            (_a = document
+                .querySelector("small.copydanger")) === null || _a === void 0 ? void 0 : _a.classList.remove("d-none");
             console.error("Erro ao copiar:", err);
         });
     }
