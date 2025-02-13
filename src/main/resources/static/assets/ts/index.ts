@@ -1,19 +1,45 @@
-const handleSendLink = (event: Event): boolean => {
+const handleSendLink = async (event: Event): Promise<void> => {
     event.preventDefault();
 
-    const newlink = document.querySelector(
+    const inputElement = document.querySelector(
+        "input#linkDigitedId"
+    ) as HTMLInputElement | null;
+
+    const newLinkDiv = document.querySelector(
         "div#newLink"
     ) as HTMLDivElement | null;
+
     const valueNew = document.querySelector(
         "p#shortenedValue"
     ) as HTMLParagraphElement | null;
 
-    if (newlink && valueNew) {
-        newlink.classList.remove("d-none");
-        valueNew.innerHTML = "nova url";
+    if (!inputElement || !inputElement.value.trim()) {
+        alert("Digite uma URL válida!");
+        return;
     }
 
-    return false;
+    try {
+        const response = await fetch(
+            `/api/shorten?url=${encodeURIComponent(inputElement.value)}`,
+            {
+                method: "POST"
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Erro ao encurtar a URL");
+        }
+
+        const shortUrl = await response.text();
+
+        if (newLinkDiv && valueNew) {
+            newLinkDiv.classList.remove("d-none");
+            valueNew.innerHTML = `<a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
+        }
+    } catch (error) {
+        console.error("Erro:", error);
+        alert("Erro ao encurtar a URL.");
+    }
 };
 
 const handleCopyUrl = (): void => {
@@ -34,3 +60,5 @@ const handleCopyUrl = (): void => {
             });
     }
 };
+
+document.querySelector("form")?.addEventListener("submit", handleSendLink);

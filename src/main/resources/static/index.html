@@ -9,7 +9,6 @@
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous"
         />
-        <link rel="stylesheet" href="./assets/css/index.css" />
         <title>Encurtador de links</title>
     </head>
     <body>
@@ -19,11 +18,7 @@
         <main
             class="mt-5 pt-5 d-flex justify-content-center align-items-center"
         >
-            <form
-                action="#"
-                class="shadow-lg rounded bg-secondary-subtle p-5"
-                onsubmit="return handleSendLink(event)"
-            >
+            <form action="/" class="shadow-lg rounded bg-secondary-subtle p-5">
                 <div class="mb-3">
                     <label for="linkDigitedId" class="form-label">
                         Digite o link:
@@ -51,7 +46,7 @@
                         <button
                             type="button"
                             class="btn btn-outline-dark shadow-lg"
-                            onclick="handleCopyUrl"
+                            onclick="handleCopyUrl()"
                         >
                             Copiar
                         </button>
