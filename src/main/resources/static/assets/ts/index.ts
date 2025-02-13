@@ -1,4 +1,4 @@
-function sendLink(event: Event): boolean {
+const handleSendLink = (event: Event): boolean => {
     event.preventDefault();
 
     const newlink = document.querySelector(
@@ -14,9 +14,9 @@ function sendLink(event: Event): boolean {
     }
 
     return false;
-}
+};
 
-function copyUrl(): void {
+const handleCopyUrl = (): void => {
     const valueToCopy = document.querySelector(
         "p#shortenedValue"
     ) as HTMLParagraphElement | null;
@@ -33,4 +33,4 @@ function copyUrl(): void {
                 console.error("Erro ao copiar:", err);
             });
     }
-}
+};

@@ -1,24 +1,25 @@
-function sendLink(event) {
+"use strict";
+const handleSendLink = (event) => {
     event.preventDefault();
-    var newlink = document.querySelector("div#newLink");
-    var valueNew = document.querySelector("p#shortenedValue");
+    const newlink = document.querySelector("div#newLink");
+    const valueNew = document.querySelector("p#shortenedValue");
     if (newlink && valueNew) {
         newlink.classList.remove("d-none");
         valueNew.innerHTML = "nova url";
     }
     return false;
-}
-function copyUrl() {
-    var valueToCopy = document.querySelector("p#shortenedValue");
+};
+const handleCopyUrl = () => {
+    const valueToCopy = document.querySelector("p#shortenedValue");
     if (valueToCopy) {
-        var text = valueToCopy.innerText;
+        const text = valueToCopy.innerText;
         navigator.clipboard
             .writeText(text)
-            .then(function () {
+            .then(() => {
             alert("Texto copiado!");
         })
-            .catch(function (err) {
+            .catch((err) => {
             console.error("Erro ao copiar:", err);
         });
     }
-}
+};
