@@ -51,6 +51,7 @@
                         <button
                             type="button"
                             class="btn btn-outline-dark shadow-lg"
+                            onclick="copyUrl"
                         >
                             Copiar
                         </button>
@@ -62,15 +63,23 @@
             function sendLink(event) {
                 event.preventDefault();
 
-                const newlink = document.querySelector("#newLink");
-                const valueNew = document.querySelector("#shortenedValue");
+                const newlink = document.querySelector("div#newLink");
+                const valueNew = document.querySelector("p#shortenedValue");
 
                 newlink.classList.remove("d-none");
                 valueNew.innerHTML = "nova url";
 
                 return false;
             }
+
+            function copyUrl() {
+                const valueToCopy = document.querySelector("p#shortenedValue");
+                valueToCopy.select();
+                valueToCopy.setSelectionRange(0, 99999);
+                navigator.clipboard.writeText(valueToCopy.value);
+            }
         </script>
+        <script src="assets/js/index.js"></script>
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
