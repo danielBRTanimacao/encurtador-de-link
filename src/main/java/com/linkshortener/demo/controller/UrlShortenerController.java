@@ -27,7 +27,6 @@ public class UrlShortenerController {
     public List<ShortUrl> getAllUrls() {
         return service.listAll();
     }
-    
 
     @PostMapping("/shorten")
     public ResponseEntity<String> shortenUrl(@RequestParam String url) {
@@ -38,7 +37,17 @@ public class UrlShortenerController {
     @GetMapping("/s/{shortCode}")
     public ResponseEntity<Object> redirectToOriginal(@PathVariable String shortCode) {
         Optional<String> originalUrl = service.getOriginalUrl(shortCode);
-        return originalUrl.map(url -> ResponseEntity.status(302).location(URI.create(url)).build())
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    
+        if (originalUrl.isPresent()) {
+            String url = originalUrl.get();
+            
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                url = "http://" + url;
+            }
+            return ResponseEntity.status(302).location(URI.create(url)).build();
+        }
+    
+        return ResponseEntity.notFound().build();
     }
 }
+    

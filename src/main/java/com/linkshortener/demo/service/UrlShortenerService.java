@@ -13,7 +13,7 @@ import java.util.Random;
 public class UrlShortenerService {
     
     private final ShortUrlRepository repository;
-    private static final String BASE_URL = "http://localhost:8080/s/";
+    private static final String BASE_URL = "http://127.0.0.1:8000/api/s/";
 
     public List<ShortUrl> listAll() {
         return repository.findAll();
@@ -39,7 +39,7 @@ public class UrlShortenerService {
         StringBuilder shortCode = new StringBuilder();
         Random random = new Random();
         
-        for (int i = 0; i < 6; i++) { // Gera um código de 6 caracteres
+        for (int i = 0; i < 6; i++) {
             shortCode.append(characters.charAt(random.nextInt(characters.length())));
         }
         
