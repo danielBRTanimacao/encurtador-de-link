@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var _a;
 const handleSendLink = (event) => __awaiter(void 0, void 0, void 0, function* () {
-    var _b;
     event.preventDefault();
     const inputElement = document.querySelector("input#linkDigitedId");
     const newLinkDiv = document.querySelector("div#newLink");
@@ -19,8 +18,9 @@ const handleSendLink = (event) => __awaiter(void 0, void 0, void 0, function* ()
         alert("Digite uma URL válida!");
         return;
     }
+    const filteredUrl = extractMainPart(inputElement.value);
     try {
-        const response = yield fetch(`/api/shorten?url=${encodeURIComponent(inputElement.value)}`, {
+        const response = yield fetch(`/api/shorten?url=${encodeURIComponent(filteredUrl)}`, {
             method: "POST"
         });
         if (!response.ok) {
@@ -33,10 +33,17 @@ const handleSendLink = (event) => __awaiter(void 0, void 0, void 0, function* ()
         }
     }
     catch (error) {
-        console.error("Erro:", error);
-        (_b = document.querySelector("div.alert")) === null || _b === void 0 ? void 0 : _b.classList.remove("d-none");
+        const divAlert = document.querySelector("div.alert");
+        if (divAlert) {
+            divAlert.classList.remove("d-none");
+            divAlert.innerHTML = `Não foi possível encurtar o link... ${error}`;
+        }
     }
 });
+const extractMainPart = (url) => {
+    const match = url.match(/^(https?:\/\/[^\/]+\/(?:[^\/]+\/){2}[^\/]+\/)/);
+    return match ? match[1] : url;
+};
 const handleCopyUrl = () => {
     const valueToCopy = document.querySelector("p#shortenedValue");
     if (valueToCopy) {

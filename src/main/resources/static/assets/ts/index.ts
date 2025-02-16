@@ -18,9 +18,11 @@ const handleSendLink = async (event: Event): Promise<void> => {
         return;
     }
 
+    const filteredUrl = extractMainPart(inputElement.value);
+
     try {
         const response = await fetch(
-            `/api/shorten?url=${encodeURIComponent(inputElement.value)}`,
+            `/api/shorten?url=${encodeURIComponent(filteredUrl)}`,
             {
                 method: "POST"
             }
@@ -37,9 +39,17 @@ const handleSendLink = async (event: Event): Promise<void> => {
             valueNew.innerHTML = `<a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
         }
     } catch (error) {
-        console.error("Erro:", error);
-        document.querySelector("div.alert")?.classList.remove("d-none");
+        const divAlert = document.querySelector("div.alert") as HTMLDivElement;
+        if (divAlert) {
+            divAlert.classList.remove("d-none");
+            divAlert.innerHTML = `Não foi possível encurtar o link... ${error}`;
+        }
     }
+};
+
+const extractMainPart = (url: string): string => {
+    const match = url.match(/^(https?:\/\/[^\/]+\/(?:[^\/]+\/){2}[^\/]+\/)/);
+    return match ? match[1] : url;
 };
 
 const handleCopyUrl = (): void => {
