@@ -47,5 +47,3 @@ tsc
 ```
 
 Automaticamente o js e gerado e ja esta injetado no codigo
-
-Dentro do backend do projeto e necessario criar os JSONs `courses.json` e o `events.json` para modificar a api e diretamente no main
